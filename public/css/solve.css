@@ -1,0 +1,106 @@
+@import './style.css';
+
+.right-probs {
+  position: absolute;
+  margin-left: 20%;
+  margin-top: 1%;
+  width: 80%;
+  font-weight: 300;
+  color: #666;
+  overflow: scroll;
+}
+.right-probs .probs .title {
+  font-size: 16px;
+  font-weight: 400;
+}
+.right-probs .prob {
+  float: left;
+  background: #fff;
+  width: 23%;
+  min-height: 140px;
+  padding: 0;
+  transition: all 0.2s ease;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  background-repeat: no-repeat;
+  background-position: 100%;
+  box-shadow: 0 2px 0 rgba(0,0,0,0.15);
+  border-radius: 3px;
+}
+.right-probs .prob:hover {
+  box-shadow: 0 3px 0 rgba(0,0,0,0.1);
+  transform: translateY(-1px);
+}
+.right-probs .prob .wrapper {
+  padding: 25px 20px;
+}
+.right-probs .prob .title {
+  margin-bottom: 15px;
+}
+.right-probs .prob .desc {
+  display: none;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.right-probs .prob .tag {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  border-radius: 3px;
+  padding: 7px 7px;
+  transition: all 0.3s ease;
+  margin-right: 5px;
+}
+.right-probs .prob .adobe {
+  background-color: #e77b7b;
+}
+.right-probs .prob .adobe:after {
+  content: 'Adobe';
+}
+.right-probs .prob .software {
+  background-color: #9de7ee;
+}
+.right-probs .prob .software:after {
+  content: 'Software';
+}
+.right-probs .prob .hardware {
+  background-color: #9dcaee;
+}
+.right-probs .prob .hardware:after {
+  content: 'Hardware';
+}
+.right-probs .prob .request-bottom {
+  margin-top: 30px;
+  font-size: 12px;
+  padding-bottom: 10px;
+}
+.right-probs .prob .request-bottom .requester {
+  float: left;
+}
+.right-probs .prob .request-bottom .request-time {
+  float: right;
+}
+.right-probs .prob .fa-quote-right {
+  margin-left: 10px;
+}
+.right-probs .prob .btn-help {
+  display: none;
+  padding-bottom: -25px;
+  height: 50px;
+  width: 100%;
+  background-color: #60c8d1;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 50px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+.right-probs .prob .btn-help:after {
+  content: 'I want to help!';
+}
+.right-probs .prob .btn-help:hover {
+  background-color: #7ddbe4;
+}
