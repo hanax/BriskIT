@@ -4,8 +4,6 @@ var Msg = React.createClass({
   },
   
   getMsgSource: function() {
-    console.log(Parse.User.current().get("username"));
-
     if (this.props.source === Parse.User.current().get("username")) {
       this.state.source = "sent";
     } else {
@@ -87,7 +85,10 @@ var ChatBox = React.createClass({
 
     var curRequest = Parse.Object.extend("Request");
     var reQuery = new Parse.Query(curRequest);
-    reQuery.equalTo("objectId", $.urlParam("id"));
+    reQuery.equalTo(
+      "objectId", 
+      window.location.pathname.substr(window.location.pathname.lastIndexOf('/')+1)
+    );
     reQuery.find({
       success: function(data) {
         console.log("receive request query");
@@ -133,21 +134,6 @@ var ChatBox = React.createClass({
   },
 
   handleMsgSubmit: function(newMsg) {
-    // var data = this.state.data;
-    // var newData = data.concat([newMsg]);
-    // this.setState({data: newData});
-    // $.ajax({
-    //   url: this.props.url,
-    //   dataType: 'json',
-    //   type: 'POST',
-    //   data: newMsg,
-    //   success: function(data) {
-    //     this.setState({data: data});
-    //   }.bind(this),
-    //   error: function(xhr, status, err) {
-    //     console.error(this.props.url, status, err.toString());
-    //   }.bind(this)
-    // });
     var Message = Parse.Object.extend("Message");
     var newMessage = new Message();
     newMessage.set("message", newMsg);
@@ -159,8 +145,7 @@ var ChatBox = React.createClass({
         console.log("Successfully saved message");
       },
       error: function(obj, error) {
-        // alert("Error saving message: " + error.code + " " + error.message);
-        console.log(error);
+        console.log("Error saving message: ", error);
       }
     });
   },
@@ -205,4 +190,3 @@ var updateMsg = function(message) {
 }
 
 window.updateMsg = updateMsg;
-
