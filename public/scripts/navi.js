@@ -31,7 +31,7 @@ var NaviBox = React.createClass({
   componentDidMount: function() {
     var curPath = window.location.pathname;
     console.log("curPath", curPath);
-    if (curPath.indexOf("solve") > -1) {
+    if (curPath.indexOf("solve") > -1 || curPath === '/') {
       $(this.refs.solve).addClass("navi-current");
     } else if (curPath.indexOf("solving") > -1 || curPath.indexOf("chatting") > -1) {
       $(this.refs.solving).addClass("navi-current");
