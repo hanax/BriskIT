@@ -88,7 +88,7 @@ var FormBox = React.createClass({
 
           <div className="input-set login-input">
             <span className="fa fa-user"></span>
-            <input type="text" placeholder="Your name" ref="username" />
+            <input type="text" placeholder="Username" ref="username" />
           </div>
           <div className="input-set login-input">
             <span className="fa fa-lock"></span>
