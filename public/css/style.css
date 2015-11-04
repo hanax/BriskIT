@@ -87,6 +87,7 @@ a:hover {
 }
 
 .top-greeting-bar {
+  opacity: .95;
   position: fixed;
   top: 0;
   right: 0;

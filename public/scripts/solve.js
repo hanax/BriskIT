@@ -1,9 +1,15 @@
 var Ticket = React.createClass({
   componentDidMount: function() {
     $(this.refs.btnHelp).hide();
+    if (this.props.photo != null) {
+      this.refs.descImage.src = this.props.photo["_url"];
+      $(this.refs.descImage).show();
+    }
   },
   handleClick: function(e) {
-    if (e.target.classList[0] != "btn-help") {
+    if (e.target.classList[0] == "desc-image") {
+      window.open(e.target.src, '_blank');
+    } else if (e.target.classList[0] != "btn-help") {
       $(this.refs.btnHelp).slideToggle('fast');
       $(this.refs.desc).slideToggle('fast');
     }
@@ -25,6 +31,7 @@ var Ticket = React.createClass({
             <span className="fa fa-quote-left"> </span>
             <span> {this.props.desc} </span>
             <span className="fa fa-quote-right"></span>
+            <img className="desc-image" ref="descImage" />
           </div>
           <div className="tag adobe"></div>
           <div className="tag software"></div>
@@ -54,6 +61,7 @@ var TicketList = React.createClass({
           title={ticket.get("title")} 
           time={ticket.get("createdAt").toString().substring(0, 10)} 
           desc={ticket.get("requestMessage")} 
+          photo={ticket.get("photoFile")}
           ticketObj={ticket}
           key={index}>
         </Ticket>

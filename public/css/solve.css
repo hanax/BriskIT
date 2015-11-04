@@ -43,6 +43,13 @@
   margin-bottom: 20px;
   font-size: 14px;
 }
+.right-probs .prob .desc-image{
+  display: none;
+  margin-top: 15px;
+  width: 100%;
+  height: auto;
+  cursor: pointer;
+}
 .right-probs .prob .tag {
   display: inline-block;
   font-size: 10px;
