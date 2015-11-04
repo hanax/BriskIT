@@ -8,7 +8,8 @@ var Ticket = React.createClass({
   },
   handleClick: function(e) {
     if (e.target.classList[0] == "desc-image") {
-      window.open(e.target.src, '_blank');
+      TicketList.showFullscreenImage(this.props.photo["_url"]);
+      // window.open(e.target.src, '_blank');
     } else if (e.target.classList[0] != "btn-help") {
       $(this.refs.btnHelp).slideToggle('fast');
       $(this.refs.desc).slideToggle('fast');
@@ -16,7 +17,6 @@ var Ticket = React.createClass({
   },
   submitHelp: function() {
     takeRequest(this.props.ticketObj);
-    //ticketsBox.getTickets();
     $(this.refs.curTicket).fadeOut();
     updateMyRequestNumber();
   },
@@ -53,7 +53,17 @@ var Ticket = React.createClass({
 });
 
 var TicketList = React.createClass({
+  statics: {
+    showFullscreenImage: function(s) {
+      $(".desc-image-fullscreen").attr("src", s);
+      $(".desc-image-fullscreen-div").fadeIn("fast")
+    }
+  },
   render: function() {
+    $(".desc-image-fullscreen-div").on("click", function(){
+      $(".desc-image-fullscreen-div").fadeOut("fast")}
+    );
+
     var ticketNodes = this.props.tickets.map(function(ticket, index) {
       return (
         <Ticket 
@@ -70,6 +80,9 @@ var TicketList = React.createClass({
     return (
       <div className="ticket-list">
         {ticketNodes}
+        <div className="desc-image-fullscreen-div">
+          <img className="desc-image-fullscreen" />              
+        </div>
       </div>
     );
   }
