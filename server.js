@@ -4,8 +4,6 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
 
-// var routes = require('./routes/index');
-
 var app = express();
 
 // view engine setup
@@ -18,10 +16,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// app.use('/', routes);
-
-app.get('*', function (request, response){
-  response.sendFile(path.resolve(__dirname, 'public', 'index.html'))
+app.get('*', function(req, res, next){
+  res.render('index');
 })
 
 // catch 404 and forward to error handler
