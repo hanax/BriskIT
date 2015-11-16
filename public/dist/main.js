@@ -25263,7 +25263,6 @@
 	  }, {
 	    key: 'submitHelp',
 	    value: function submitHelp() {
-	      // TODO: update navi
 	      this.props.update();
 	      (0, _utils.takeRequest)(this.props.ticketObj);
 	    }
@@ -25358,7 +25357,7 @@
 	        $(".desc-image-fullscreen-div").fadeOut("fast");
 	      });
 
-	      var that = this;
+	      var _this = this;
 	      var ticketNodes = this.props.tickets.map(function (ticket, index) {
 	        return _react2.default.createElement(Ticket, {
 	          author: ticket.get("requester"),
@@ -25368,7 +25367,7 @@
 	          photo: ticket.get("photoFile"),
 	          ticketObj: ticket,
 	          key: index,
-	          update: that.props.update });
+	          update: _this.props.update });
 	      });
 	      return _react2.default.createElement(
 	        'div',
@@ -25410,11 +25409,10 @@
 	  _createClass(SolveTicketsBox, [{
 	    key: 'getTickets',
 	    value: function getTickets() {
-	      var openRequests = Parse.Object.extend("Request");
-	      var query = new Parse.Query(openRequests);
+	      var query = new Parse.Query(Parse.Object.extend("Request")).equalTo("taken", 0);
+
 	      var _this = this;
 
-	      query.equalTo("taken", 0);
 	      query.find({
 	        success: function success(data) {
 	          console.log("Successfully retrieved " + data.length + " requests.");
@@ -25781,6 +25779,8 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	function _typeof(obj) { return obj && typeof Symbol !== "undefined" && obj.constructor === Symbol ? "symbol" : typeof obj; }
+
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -25793,15 +25793,15 @@
 	  function LoginForm(props) {
 	    _classCallCheck(this, LoginForm);
 
-	    var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(LoginForm).call(this, props));
+	    var _this2 = _possibleConstructorReturn(this, Object.getPrototypeOf(LoginForm).call(this, props));
 
-	    _this.state = { signingUp: false };
-	    _this.handleSubmit = _this.handleSubmit.bind(_this);
-	    _this.clearInput = _this.clearInput.bind(_this);
-	    _this.onSigningUp = _this.onSigningUp.bind(_this);
-	    _this.onLoggingIn = _this.onLoggingIn.bind(_this);
-	    _this.login = _this.login.bind(_this);
-	    return _this;
+	    _this2.state = { signingUp: false };
+	    _this2.handleSubmit = _this2.handleSubmit.bind(_this2);
+	    _this2.clearInput = _this2.clearInput.bind(_this2);
+	    _this2.onSigningUp = _this2.onSigningUp.bind(_this2);
+	    _this2.onLoggingIn = _this2.onLoggingIn.bind(_this2);
+	    _this2.login = _this2.login.bind(_this2);
+	    return _this2;
 	  }
 
 	  _createClass(LoginForm, [{
@@ -25860,9 +25860,11 @@
 	  }, {
 	    key: 'handleSubmit',
 	    value: function handleSubmit(e) {
+	      var _this3 = this;
+
 	      e.preventDefault();
 
-	      var that = this;
+	      var _this = this;
 	      if (this.state.signingUp == false) {
 	        // logging in
 	        var username = this.refs.username.value.trim();
@@ -25873,45 +25875,46 @@
 	        }
 	        this.login(username, pswd);
 	      } else {
-	        // signing up
+	        var _ret = (function () {
+	          // signing up
 
-	        var username = this.refs.username.value.trim();
-	        var pswd = this.refs.pswd.value.trim();
-	        var fname = this.refs.fname.value.trim();
-	        var lname = this.refs.lname.value.trim();
-	        var email = this.refs.email.value.trim();
-	        if (!pswd || !username || !fname || !lname || !email) {
-	          window.alert("Missing fields");
-	          return;
-	        }
-
-	        var user = new Parse.User();
-	        user.set("username", username);
-	        user.set("password", pswd);
-	        user.set("email", email);
-	        user.set("first", fname);
-	        user.set("last", lname);
-
-	        user.signUp(null, {
-	          success: function success(user) {
-	            window.alert("Hooray! You are all set.");
-	            that.login(username, pswd);
-	          },
-	          error: function error(user, _error) {
-	            switch (_error.code) {
-	              case 100:
-	                window.alert("Please check network connection.");break;
-	              case 125:
-	                window.alert("Bad email format.");break;
-	              case 202:
-	                window.alert("Please pick different username.");break;
-	              case 203:
-	                window.alert("Please pick different email.");break;
-	              default:
-	                window.alert("Oops something is wrong. Please try later.");
-	            }
+	          var username = _this3.refs.username.value.trim();
+	          var pswd = _this3.refs.pswd.value.trim();
+	          var fname = _this3.refs.fname.value.trim();
+	          var lname = _this3.refs.lname.value.trim();
+	          var email = _this3.refs.email.value.trim();
+	          if (!pswd || !username || !fname || !lname || !email) {
+	            window.alert("Missing fields");
+	            return {
+	              v: undefined
+	            };
 	          }
-	        });
+
+	          var user = new Parse.User().set("username", username).set("password", pswd).set("email", email).set("first", fname).set("last", lname);
+
+	          user.signUp(null, {
+	            success: function success(user) {
+	              window.alert("Hooray! You are all set.");
+	              _this.login(username, pswd);
+	            },
+	            error: function error(user, _error) {
+	              switch (_error.code) {
+	                case 100:
+	                  window.alert("Please check network connection.");break;
+	                case 125:
+	                  window.alert("Bad email format.");break;
+	                case 202:
+	                  window.alert("Please pick different username.");break;
+	                case 203:
+	                  window.alert("Please pick different email.");break;
+	                default:
+	                  window.alert("Oops something is wrong. Please try later.");
+	              }
+	            }
+	          });
+	        })();
+
+	        if ((typeof _ret === 'undefined' ? 'undefined' : _typeof(_ret)) === "object") return _ret.v;
 	      }
 	    }
 	  }, {
@@ -26029,13 +26032,17 @@
 	  _createClass(NaviBox, [{
 	    key: 'componentWillReceiveProps',
 	    value: function componentWillReceiveProps(nextProps) {
+	      var _this2 = this;
+
 	      // Animate the badge
 	      if (!(nextProps.badgeNum == this.props.badgeNum)) {
-	        var numBadge = this.refs.numBadge;
-	        $(numBadge).removeClass("animated");
-	        setTimeout(function () {
-	          $(numBadge).addClass("animated");
-	        }, 10);
+	        (function () {
+	          var numBadge = _this2.refs.numBadge;
+	          $(numBadge).removeClass("animated");
+	          setTimeout(function () {
+	            $(numBadge).addClass("animated");
+	          }, 10);
+	        })();
 	      }
 	    }
 	  }, {
@@ -26184,6 +26191,7 @@
 	    value: function componentDidMount() {
 	      this.getMyUsername();
 	      var _this = this;
+
 	      $(this.refs.greetingAvatar).on("click", function () {
 	        $(_this.refs.logOut).fadeToggle("fast");
 	      });
@@ -26196,6 +26204,7 @@
 	    key: 'render',
 	    value: function render() {
 	      var curPath = window.location.pathname;
+
 	      $(this.refs.gGreetings).hide();
 	      $(this.refs.gBack).hide();
 	      $(this.refs.gSessions).hide();
@@ -26395,23 +26404,19 @@
 	  _createClass(SolvingTicketsBox, [{
 	    key: 'getTickets',
 	    value: function getTickets() {
-	      var openRequests = Parse.Object.extend("Request");
-	      var currentUser = Parse.User.current();
-	      var query = new Parse.Query(openRequests);
-	      var _this = this;
+	      var query = new Parse.Query(Parse.Object.extend("Request")).equalTo("helper", Parse.User.current()).notEqualTo("helperSolved", 1);
 
-	      query.equalTo("helper", currentUser);
-	      query.notEqualTo("helperSolved", 1);
+	      var _this = this;
 
 	      query.find({
 	        success: function success(data) {
-	          if (data.length > 0) {
-	            for (var i = 0; i < data.length; i++) {
-	              // console.log(data[i].get("helper"));
-	              // subscribeToChat(data[i]);
-	            }
-	          }
-	          console.log("Successfully retrieved " + data.length + " scores.");
+	          // if (data.length > 0) {
+	          //   for (var i = 0; i < data.length; i++) {
+	          //     console.log(data[i].get("helper"));
+	          //     subscribeToChat(data[i]);
+	          //   }
+	          // }
+	          // console.log("Successfully retrieved " + data.length + " scores.");
 	          _this.setState({ data: data });
 	        },
 	        error: function error(_error) {
@@ -26658,11 +26663,10 @@
 	  }, {
 	    key: 'getMsg',
 	    value: function getMsg() {
+	      var reQuery = new Parse.Query(Parse.Object.extend("Request")).equalTo("objectId", this.props.params.id);
+
 	      var _this = this;
 
-	      var curRequest = Parse.Object.extend("Request");
-	      var reQuery = new Parse.Query(curRequest);
-	      reQuery.equalTo("objectId", this.props.params.id);
 	      reQuery.find({
 	        success: function success(data) {
 	          console.log("receive request query");
@@ -26670,9 +26674,7 @@
 
 	          _this.setState({ requestObj: data[0] });
 
-	          var myMsgs = Parse.Object.extend("Message");
-	          var query = new Parse.Query(myMsgs);
-	          query.equalTo("request", data[0]);
+	          var query = new Parse.Query(Parse.Object.extend("Message")).equalTo("request", data[0]);
 
 	          query.find({
 	            success: function success(dataMsg) {
@@ -26713,10 +26715,7 @@
 	    key: 'handleMsgSubmit',
 	    value: function handleMsgSubmit(newMsg) {
 	      var Message = Parse.Object.extend("Message");
-	      var newMessage = new Message();
-	      newMessage.set("message", newMsg);
-	      newMessage.set("sender", Parse.User.current().get("username"));
-	      newMessage.set("request", this.state.requestObj);
+	      var newMessage = new Message().set("message", newMsg).set("sender", Parse.User.current().get("username")).set("request", this.state.requestObj);
 
 	      newMessage.save(null, {
 	        success: function success(results) {
