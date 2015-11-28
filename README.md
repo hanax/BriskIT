@@ -7,7 +7,7 @@ BriskIT allows you to get IT help whenever and wherever your tech breaks down. J
     * Local
 ```
     $ npm install
-    $ webpack
+    $ npm start
 ```
 
 <img src="http://jadami10.github.io/ITHelp/mock.png" width=500px>
