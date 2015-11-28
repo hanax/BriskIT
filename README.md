@@ -1,5 +1,11 @@
 # BriskIT
 
+A course project for Cornell CS5356 Fall2015
+
+* Front-end: React / React router / webpack / jade / stylus
+* Other (Data, back-end): Node.js / Parse / PubNub
+
+
 BriskIT allows you to get IT help whenever and wherever your tech breaks down. Just send us a quick message of your issue, take a photo of the error message, and one of our distributed IT professionals will help resolve your issue.
 
 * If you are an IT professional willing to give help: (for testing: log in with hannah/hannah)
