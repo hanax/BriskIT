@@ -12,5 +12,4 @@ BriskIT allows you to get IT help whenever and wherever your tech breaks down. J
 
 <img src="http://jadami10.github.io/ITHelp/mock.png" width=500px>
 * If you want any help: 
-    * Corresponding iOS app: Pending Apple app review.
-    * [Repo](https://github.com/jadami10/ITHelp/)
+    * [Corresponding iOS app](https://github.com/jadami10/ITHelp/): Pending Apple app review.
