@@ -1,4 +1,4 @@
-# BriskIT
+# BriskIT [![Build Status](https://travis-ci.org/hanax/BriskIT.svg?branch=master)](https://travis-ci.org/hanax/BriskIT)
 
 A course project for Cornell CS5356 Fall2015
 
