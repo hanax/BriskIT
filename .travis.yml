@@ -1,4 +1,5 @@
 before_script:
+  - npm install babel
   - npm install -g mocha
 language: node_js
 node_js:
