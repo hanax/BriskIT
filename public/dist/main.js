@@ -577,7 +577,7 @@
 	  _createClass(App, [{
 	    key: 'updateSolvingBadge',
 	    value: function updateSolvingBadge(num) {
-	      this.setState({ solvingBadgeNum: this.state.solvingBadgeNum + num });
+	      this.setState({ solvingBadgeNum: Math.max(this.state.solvingBadgeNum + num, 0) });
 	    }
 	  }, {
 	    key: 'updateSolvedBadge',

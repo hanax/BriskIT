@@ -36,7 +36,7 @@ class App extends React.Component {
   }
 
   updateSolvingBadge(num) {
-    this.setState({solvingBadgeNum: this.state.solvingBadgeNum + num});
+    this.setState({solvingBadgeNum: Math.max(this.state.solvingBadgeNum + num, 0)});
   }
 
   updateSolvedBadge(num) {
